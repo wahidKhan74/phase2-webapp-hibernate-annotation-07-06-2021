@@ -44,7 +44,7 @@ public class InitializeSession extends HttpServlet {
 			// close session
 			session.close();
 		} catch (Exception e) {
-			out.print("<h3 style='color:red'> Hibernate session is failed ! </h3>");
+			out.print("<h3 style='color:red'> Hibernate session is failed ! </h3>" + e);
 		}
 	}
 

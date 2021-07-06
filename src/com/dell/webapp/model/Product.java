@@ -2,11 +2,14 @@ package com.dell.webapp.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 //This is  Encapsulated class, POJO,  Bean
@@ -31,6 +34,11 @@ public class Product {
 	
 	@Column(name="modified_at")
 	private Date modifiedAt;
+	
+	@OneToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name="id")
+	private ProductDetail detail;
+	
 	
 	// constructor
 	public Product() {}
@@ -84,6 +92,14 @@ public class Product {
 	}
 	public void setModifiedAt(Date modifiedAt) {
 		this.modifiedAt = modifiedAt;
+	}
+
+	public ProductDetail getDetail() {
+		return detail;
+	}
+
+	public void setDetail(ProductDetail detail) {
+		this.detail = detail;
 	}
 
 	@Override

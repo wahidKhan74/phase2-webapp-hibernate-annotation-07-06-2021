@@ -14,6 +14,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
 import com.dell.webapp.model.Product;
+import com.dell.webapp.model.ProductDetail;
 import com.dell.webapp.util.HibernateSessionUtil;
 
 
@@ -39,9 +40,15 @@ public class AddProduct extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		request.getRequestDispatcher("index.html").include(request, response);
 		
-		//get product params
+		//get product info params
 		String name = request.getParameter("name");
 		String price = request.getParameter("price");
+		//get product details params
+		int dimentions = Integer.parseInt(request.getParameter("dimentions"));
+		String description = request.getParameter("description");
+		String brand = request.getParameter("brand");
+		int weight = Integer.parseInt(request.getParameter("weight"));
+		int stock = Integer.parseInt(request.getParameter("stock"));
 		
 		// build hibernate session factory
 		try {
@@ -56,6 +63,8 @@ public class AddProduct extends HttpServlet {
 			
 			// 4. create a product object			
 			Product product = new Product(name, Double.parseDouble(price));
+			ProductDetail productDetail = new ProductDetail(dimentions, description, brand, weight, stock);
+			product.setDetail(productDetail);
 			
 			// 5. save product object
 			session.save(product);
@@ -64,7 +73,7 @@ public class AddProduct extends HttpServlet {
 			tx.commit();
 			
 			if(session != null) {
-				out.print("<h3 style='color:green'> Product is created sucessfully ! </h3>");
+				out.print("<h3 style='color:green'> Product is created with product details sucessfully ! </h3>");
 			}
 			// close session
 			session.close();

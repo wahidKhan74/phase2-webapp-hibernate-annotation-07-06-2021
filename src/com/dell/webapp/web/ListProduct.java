@@ -55,6 +55,7 @@ public class ListProduct extends HttpServlet {
 				out.print("<th> Product Id</th>");
 				out.print("<th> Product Name</th>");
 				out.print("<th> Product Price</th>");
+				out.print("<th> Product Details</th>");
 				out.print("<th> CreateAt </th>");
 				out.print("<th> Modified </th>");
 				out.print("</tr>");
@@ -63,6 +64,7 @@ public class ListProduct extends HttpServlet {
 				out.print("<td>"+p.getId()+"</td>");
 				out.print("<td>"+p.getName()+"</td>");
 				out.print("<td>"+p.getPrice()+"</td>");
+				out.print("<td>"+p.getDetail().toString()+"</td>");
 				out.print("<td>"+p.getCreatedAt()+"</td>");
 				out.print("<td>"+p.getModifiedAt()+"</td>");
 				out.print("</tr>");
