@@ -5,10 +5,13 @@ import java.util.Date;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -39,6 +42,8 @@ public class Product {
 	@JoinColumn(name="id")
 	private ProductDetail detail;
 	
+	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	private Order order;	
 	
 	// constructor
 	public Product() {}
@@ -100,6 +105,14 @@ public class Product {
 
 	public void setDetail(ProductDetail detail) {
 		this.detail = detail;
+	}
+
+	public Order getOrder() {
+		return order;
+	}
+
+	public void setOrder(Order order) {
+		this.order = order;
 	}
 
 	@Override
