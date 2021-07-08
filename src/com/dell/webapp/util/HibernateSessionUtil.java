@@ -4,6 +4,7 @@ import org.hibernate.SessionFactory;
 import org.hibernate.cfg.Configuration;
 
 import com.dell.webapp.model.Order;
+import com.dell.webapp.model.Payment;
 import com.dell.webapp.model.Product;
 import com.dell.webapp.model.ProductDetail;
 
@@ -18,6 +19,7 @@ public class HibernateSessionUtil {
 				.addAnnotatedClass(Product.class)
 				.addAnnotatedClass(ProductDetail.class)
 				.addAnnotatedClass(Order.class)
+				.addAnnotatedClass(Payment.class)
 				.buildSessionFactory();
 		return factory;
 	}

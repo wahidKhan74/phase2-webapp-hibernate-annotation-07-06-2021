@@ -1,6 +1,7 @@
 package com.dell.webapp.model;
 
 import java.util.Date;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +12,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinColumns;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -43,7 +46,12 @@ public class Product {
 	private ProductDetail detail;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
-	private Order order;	
+	private Order order;
+	
+	@ManyToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+	@JoinTable(name="product_payment", joinColumns=@JoinColumn(name="id")
+	,inverseJoinColumns=@JoinColumn(name="payment_id"))
+	private Set<Payment> payments;
 	
 	// constructor
 	public Product() {}
@@ -113,6 +121,15 @@ public class Product {
 
 	public void setOrder(Order order) {
 		this.order = order;
+	}
+
+	
+	public Set<Payment> getPayments() {
+		return payments;
+	}
+
+	public void setPayments(Set<Payment> payments) {
+		this.payments = payments;
 	}
 
 	@Override
